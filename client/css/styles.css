@@ -1,0 +1,252 @@
+html, body, div, header, nav, main, section, article, aside, figure, footer, time, button, ul, li, a, hgroup, h1, h2, h3, h4, p, form, input, dl, dt, dd { 
+	margin: 0;
+	padding: 0;
+}
+
+button, img, input{
+	border: none;
+}
+button{
+	cursor: pointer;
+}
+
+img {
+	display: block;
+}
+
+ul {
+	list-style: none;
+}
+
+a {
+/*	color: #ffffff;*/
+	text-decoration: none;
+}
+
+table{
+	border-collapse: collapse;
+	empty-cells: show;
+}
+
+html { 
+	font-size: 62.5%; 
+} 
+
+body { 
+	font-family: 'Ubuntu', 'Verdana', sans-serif;
+	color: #4e4e4e;
+	font-size: 1rem;
+	background-color: #ffffff;
+}
+
+.wrapper {
+	display: flex;
+	justify-content: space-between;
+	margin: 0 auto;
+	max-width: 90%;
+	background-color: transparent;
+}
+
+.float-clear:after {
+	content: "";
+	display: inline-block;
+	width: 100%;
+	height: 0;
+	clear:both;
+}
+
+/*Colors*/
+#main-header, 
+#main-footer{
+	background-color: #333333;
+}
+
+/* start --> header */
+#main-header{
+	min-height: 64px;
+	padding: 0 50px;
+}
+	#logo{
+		display: block;
+		padding-top: 12px;
+		float: left;
+	}
+	#headerToolBar{
+		padding-top: 4px;
+		margin-left: 130px;
+		color: #ffffff;
+		float: right;
+	}
+		#headerToolBar li{
+			display: inline-block;
+			vertical-align: middle;
+			padding: 7px 14px;
+			border-left: 1px solid #808080;
+		}
+		#headerToolBar li:first-child{
+			border-left: none;
+		}
+/* end <-- header */
+
+/* start --> main navigation*/
+#main-navigation{
+	display: block;
+	min-height: 40px;
+	padding: 0 40px;
+	background-color:  #1f1f1f;
+	position: relative;
+}
+
+		#main-navigation ul > li{
+			display: inline-block;
+			vertical-align: middle;
+			padding: 12px 13px;
+			position: relative;
+		}
+			#main-navigation li a{
+				color: #ffffff;
+			}
+			#main-navigation ul > li > a:hover{
+				color: #ef9e1e;
+			}
+
+	#searchForm {
+		display: block;
+		margin-top: 8px;
+		float: right;
+	}
+		#searchForm input,
+		#searchForm button{
+			display: inline-block;
+			vertical-align: middle;
+		}
+		#searchForm  input{
+			padding: 3px 3px;
+		}
+		#searchForm  button{
+			width: 27px;
+			height: 22px;
+			background-color: #f09e1e;
+		}
+/* end <-- main navigation*/
+
+/* start --> Main content*/
+
+#main-content{
+	margin-top: 8px;
+	width: 60%;
+}
+
+/*Front page*/
+#presentation h3{
+	margin: 25px 0;
+	color: #FFA500;
+	cursor: pointer;
+}
+#presentation h3:hover{
+	color: #9e9e9e;
+}
+
+#presentation ul {
+	margin-left: 30px;
+	padding-left: 10px;
+	border-left: 1px solid rgb(185, 185, 185);
+	list-style: none;
+	list-style-position: inside;
+}
+
+#presentation ul.collapsed {
+	display: none;
+}
+
+#presentation ul li{
+	margin: 2rem 0;
+	position: relative;
+}
+
+#presentation ul li a{
+	font-weight: bold;
+	color: #1f1f1f;
+}
+
+#presentation ul li a:hover{
+	color: #9e9e9e;
+}
+
+#presentation ul li a::before{
+	content: "\00a0\005C\00a0"; 
+}
+
+
+#presentation ul li a.disabled{
+	cursor: not-allowed;
+	pointer-events: none;
+	color: #9c9c9c;
+}
+
+#presentation ul li p{
+	display: inline-block;
+	white-space: nowrap; 
+	max-width: 20%;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	/* Beginning of string */
+	direction: rtl;
+}
+
+#presentation ul li p:hover span {
+	visibility: visible;
+}
+
+#presentation ul li p span {
+	visibility: hidden;
+	background-color: black;
+	color: #fff;
+	text-align: center;
+	border-radius: 6px;
+	padding: 0.5rem;
+	position: absolute;
+	left: 0;
+	bottom: -10px ;
+	z-index: 1;
+}
+
+/*Main with Aside*/
+#main-aside{
+	margin-top: 8px;
+	width: 30%;
+	height: 25vh;
+	position: -webkit-sticky;
+	position: sticky;
+	top: 0;
+}
+
+	#main-aside section {
+		padding: 2px;
+		background-color: #000000;
+		box-shadow: 3px 3px 2px #888888;
+	}
+	#main-aside section h3{
+		padding-bottom: 16px;
+		font-size: 2rem;
+		font-weight: 300;
+	}
+	#main-aside section video{
+		width: 100%;
+	}
+
+
+/* end <-- Main content*/
+
+/* start --> Aside*/
+/* end <-- Aside*/
+
+/* star --> Footer*/
+#main-footer{
+	border-top: 5px solid #595959;
+	padding-bottom: 34px;
+	color: #ffffff;
+}
+	
+
+/* end <-- Footer*/

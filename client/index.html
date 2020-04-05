@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8" />
+	<title>Media Server</title>
+	<link href='http://fonts.googleapis.com/css?family=Ubuntu:400,300,700&subset=latin,cyrillic-ext' rel='stylesheet'
+		type='text/css'>
+	<link rel="stylesheet" href="css/styles.css" />
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+
+<body>
+	<header id="main-header" class="float-clear">
+		<a id="logo" href="/">
+			<svg xml:space="preserve" viewBox="0 0 100 100" y="0px" x="0px" xmlns:xlink="http://www.w3.org/1999/xlink"
+				xmlns="http://www.w3.org/2000/svg" id="圖層_1" version="1.1" width="50px" height="50px"
+				style="background-size:initial;background-repeat-y:initial;background-repeat-x:initial;background-position-y:initial;background-position-x:initial;background-origin:initial;background-image:initial;background-color:transparent;background-clip:initial;background-attachment:initial;animation-play-state:paused">
+				<g class="ldl-scale"
+					style="transform-origin:50% 50%;transform:rotate(0deg) scale(0.8, 0.8);animation-play-state:paused">
+					<g style="animation-play-state:paused">
+						<path d="M32.4,36C18.1,51.8,4.1,69.5,21.8,87.5" stroke-miterlimit="10" stroke-linejoin="round"
+							stroke-linecap="round" stroke-width="3.5" stroke="#333333" fill="none"
+							style="stroke:rgb(51, 51, 51);animation-play-state:paused"></path>
+						<circle r="22.5" cy="50" cx="50" stroke-miterlimit="10" stroke-linejoin="round"
+							stroke-linecap="round" stroke-width="3.5" stroke="#333333" fill="#919293"
+							style="stroke:rgb(51, 51, 51);fill:rgb(145, 146, 147);animation-play-state:paused"></circle>
+					</g>
+					<path
+						d="M50,12.5c-20.7,0-37.5,16.8-37.5,37.5S29.3,87.5,50,87.5S87.5,70.7,87.5,50S70.7,12.5,50,12.5z M65.7,32.3c3.6-2.1,8.2-0.8,10.2,2.7 c2.1,3.6,0.8,8.2-2.7,10.2s-8.2,0.8-10.2-2.7C60.9,38.9,62.1,34.3,65.7,32.3z M34.3,67.7c-3.6,2.1-8.2,0.8-10.2-2.7 c-2.1-3.6-0.8-8.2,2.7-10.2c3.6-2.1,8.2-0.8,10.2,2.7C39.1,61.1,37.9,65.7,34.3,67.7z M37,42.5c-2.1,3.6-6.7,4.8-10.2,2.7 S21.9,38.6,24,35c2.1-3.6,6.7-4.8,10.2-2.7C37.9,34.3,39.1,38.9,37,42.5z M50,80c-4.1,0-7.5-3.4-7.5-7.5S45.9,65,50,65 s7.5,3.4,7.5,7.5S54.1,80,50,80z M45,50c0-2.8,2.2-5,5-5s5,2.2,5,5s-2.2,5-5,5S45,52.8,45,50z M50,35c-4.1,0-7.5-3.4-7.5-7.5 S45.9,20,50,20s7.5,3.4,7.5,7.5S54.1,35,50,35z M76,65c-2.1,3.6-6.7,4.8-10.2,2.7s-4.8-6.7-2.7-10.2c2.1-3.6,6.7-4.8,10.2-2.7 C76.8,56.8,78.1,61.4,76,65z"
+						stroke-miterlimit="10" stroke-linejoin="round" stroke-linecap="round" stroke-width="3.5"
+						stroke="#333333" fill="#D2D2D3"
+						style="stroke:rgb(51, 51, 51);fill:rgb(210, 210, 211);animation-play-state:paused"></path>
+				</g>
+			</svg>
+		</a>
+	</header>
+	<nav id="main-navigation">
+		<div>
+			<!-- <form id="searchForm" class="col-md-2">
+				<input type="text" placeholder="Search">
+				<button type="submit">
+					<span class="icon16x16 search-white"></span>
+				</button>
+			</form> -->
+			<ul>
+				<li><a href="/">Home</a></li>
+			</ul>
+		</div>
+	</nav>
+	<div class="wrapper">
+		<main id="main-content">
+			<section id="presentation">
+				{{films}}
+			</section>
+		</main>
+		<aside id="main-aside">
+			<section id="player">
+				<video id="video" controls preload="none">
+					<source class="video-sources" src="" type="video/x-msvideo">
+					<source class="video-sources" src="" type="video/webm">
+				</video>
+			</section>
+		</aside>
+	</div>
+	<footer id="main-footer">
+	</footer>
+	<script>
+		let filmAnchor,
+			subtitleAnchors = [],
+			player = document.getElementById("player"),
+			i = 1,
+			films = document.getElementById("presentation"),
+			video = document.getElementById('video'),
+			filmHandler = function filmHandler(event) {
+				let url, filmsList, track, tracks, target = event.target;
+				event.stopPropagation();
+				event.preventDefault();
+				if (target instanceof HTMLAnchorElement) {
+					url = target.href;
+					if (url.indexOf("/film") !== -1) {
+						video.setAttribute('src', url);
+						video.load();
+						video.play();
+						filmAnchor && filmAnchor.classList.remove("disabled");
+						target.classList.add("disabled");
+						filmAnchor = target;
+						tracks = video.getElementsByTagName("track");
+						while (tracks.length > 0) {
+							tracks.item(0).remove();
+						}
+						subtitleAnchors.forEach((subtitleAnchor) => {
+							subtitleAnchor.classList.remove("disabled");
+						});
+						subtitleAnchors = [];
+					}
+					if (url.indexOf("/subtitle") !== -1) {
+						track = document.createElement("track");
+						track.kind = "captions";
+						track.label = target.text;
+						track.srclang = "en";
+						track.src = url;
+						track.selected = true;
+						target.classList.add("disabled");
+						subtitleAnchors.push(target);
+						track.addEventListener("load", function () {
+							video.mode = "showing";
+							video.textTracks[0].mode = "showing"; // thanks Firefox
+						});
+						video.appendChild(track);
+					}
+				}
+				if (target instanceof HTMLHeadingElement) {
+					filmsList = target.nextSibling;
+					filmsList.classList.toggle("collapsed");
+				}
+			};
+
+		films.addEventListener("click", filmHandler, false);
+		films.getElementsByTagName("ul")[0].classList.remove("collapsed");
+	</script>
+</body>
+
+</html>
